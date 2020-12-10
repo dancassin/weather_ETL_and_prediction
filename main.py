@@ -1,5 +1,6 @@
 from weather_sql_db import create_db_connection, close_db_connection, update_db
 from utils import get_weather_data_from_OpenWeatherMap, json_to_df, transform_df
+# from satellite_image_utils import ...
 import argparse
 
 
@@ -20,7 +21,8 @@ def get_weather_data():
 
     close_db_connection(returned_connection)
 
-
+def get_satellite_image_data():
+    pass
 
 if __name__ == '__main__':
     get_weather_data()
