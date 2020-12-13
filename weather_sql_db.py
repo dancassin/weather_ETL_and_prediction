@@ -4,7 +4,7 @@ import pandas as pd
 def create_db_connection():
     ''' connect to db and create cursor obj for executing SQL statements
     '''
-    connection = sqlite3.connect('CurrentWeatherDB.db', uri=True)
+    connection = sqlite3.connect('WeatherAndSoilDB.db', uri=True)
     print('Connection with database established')
     connection.cursor()
     return connection

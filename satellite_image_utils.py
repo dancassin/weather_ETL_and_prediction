@@ -14,8 +14,10 @@ print(f'polygon: {san_diego_polygon}')
 
 current_datetime = datetime.datetime.now()
 current_UTC = int(current_datetime.replace(tzinfo=timezone.utc).timestamp())
+print(f'current time: {current_UTC}')
 days = datetime.timedelta(5)
 five_days_ago = int((current_datetime - days).replace(tzinfo=timezone.utc).timestamp())
+print(f'start_date: {five_days_ago}')
 
 
 def create_geographic_polygon(api_token):

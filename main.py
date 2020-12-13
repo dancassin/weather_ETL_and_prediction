@@ -1,5 +1,7 @@
 from weather_sql_db import create_db_connection, close_db_connection, update_db
-from utils import get_weather_data_from_OpenWeatherMap, json_to_df, transform_df
+from utils import (get_soil_data, get_weather_data_from_OpenWeatherMap, json_to_df, 
+                    transform_weather_df, concat_weather_and_soil)
+                
 # from satellite_image_utils import ...
 import argparse
 
@@ -14,8 +16,10 @@ def get_weather_data():
     """
     returned_connection = create_db_connection()
     filename = get_weather_data_from_OpenWeatherMap(args.city_id)
-    df = json_to_df(filename)
-    df_transfomed = transform_df(df)
+    weather_df = json_to_df(filename)
+    soil_df = get_soil_data()
+    merged_df = concat_weather_and_soil(weather_df, soil_df)
+    df_transfomed = transform_weather_df(merged_df)
 
     update_db(df_transfomed, returned_connection)
 
