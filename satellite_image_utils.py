@@ -15,9 +15,9 @@ print(f'polygon: {san_diego_polygon}')
 current_datetime = datetime.datetime.now()
 current_UTC = int(current_datetime.replace(tzinfo=timezone.utc).timestamp())
 print(f'current time: {current_UTC}')
-days = datetime.timedelta(5)
-five_days_ago = int((current_datetime - days).replace(tzinfo=timezone.utc).timestamp())
-print(f'start_date: {five_days_ago}')
+days = datetime.timedelta(8)
+start_date_UTC = int((current_datetime - days).replace(tzinfo=timezone.utc).timestamp())
+print(f'start_date: {start_date_UTC}')
 
 
 def create_geographic_polygon(api_token):
@@ -71,11 +71,11 @@ def get_satellite_image_from_API(api_token, polygon, start_date, end_date):
     
     api_address = f'http://api.agromonitoring.com/agro/1.0/image/search?start={start_date}&end={end_date}&polyid={polygon}&appid={api_token}'
 
-    satellite_json = requests.post(api_address).json()
+    satellite_json = requests.get(api_address).json()
     
     return satellite_json
 
 
-result = get_satellite_image_from_API(satellite_api_token, san_diego_polygon, five_days_ago, current_UTC)
+result = get_satellite_image_from_API(satellite_api_token, san_diego_polygon, start_date_UTC, current_UTC)
 
 print(result)
