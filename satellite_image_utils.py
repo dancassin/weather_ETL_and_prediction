@@ -8,16 +8,16 @@ from datetime import timezone
 load_dotenv()
 
 satellite_api_token = os.getenv('weather_api_key') #same api key as weather data
-print(f'satellite_api_token: {satellite_api_token}')
+# print(f'satellite_api_token: {satellite_api_token}')
 san_diego_polygon = os.getenv('san_diego_polygon') #unique id for created polygon manually saved to .env
-print(f'polygon: {san_diego_polygon}')
+# print(f'polygon: {san_diego_polygon}')
 
 current_datetime = datetime.datetime.now()
 current_UTC = int(current_datetime.replace(tzinfo=timezone.utc).timestamp())
-print(f'current time: {current_UTC}')
-days = datetime.timedelta(8)
+# print(f'current time: {current_UTC}')
+days = datetime.timedelta(15)
 start_date_UTC = int((current_datetime - days).replace(tzinfo=timezone.utc).timestamp())
-print(f'start_date: {start_date_UTC}')
+# print(f'start_date: {start_date_UTC}')
 
 
 def create_geographic_polygon(api_token):
@@ -76,6 +76,3 @@ def get_satellite_image_from_API(api_token, polygon, start_date, end_date):
     return satellite_json
 
 
-result = get_satellite_image_from_API(satellite_api_token, san_diego_polygon, start_date_UTC, current_UTC)
-
-print(result)
